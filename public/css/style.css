@@ -1,0 +1,15 @@
+body {
+
+}
+
+.navbar-fixed-top .navbar-top-links li{
+    display: inline-block;
+}
+
+.parameterForm{
+    text-align: center;
+}
+
+.parameterForm ul li{
+    list-style-type: none;
+}

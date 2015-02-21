@@ -1,0 +1,14 @@
+{
+  "name": "echarts-optimized",
+  "homepage": "https://github.com/aniss/echarts",
+  "_release": "22828ca367",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "22828ca36770e899f84d79448d5fbdfe047cbe09"
+  },
+  "_source": "git://github.com/aniss/echarts.git",
+  "_target": "*",
+  "_originalSource": "echarts-optimized",
+  "_direct": true
+}

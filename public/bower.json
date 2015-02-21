@@ -1,0 +1,30 @@
+{
+  "name": "bower_components",
+  "version": "0.0.1",
+  "authors": [
+    "guillaumesoul <guillaume.soullard@gmail.com>"
+  ],
+  "description": "decisionhelper library",
+  "main": "index.php",
+  "keywords": [
+    "decision"
+  ],
+  "license": "MIT",
+  "homepage": "index.php",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.3",
+    "bootstrap": "~3.3.2",
+    "echarts-optimized": "*",
+    "fontawesome": "~4.3.0",
+    "datatables": "~1.10.5",
+    "sb-admin-v2": "~0.1.0"
+  }
+}
