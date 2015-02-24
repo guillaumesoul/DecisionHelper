@@ -1,3 +1,4 @@
+
 body {
 
 }
@@ -6,10 +7,6 @@ body {
     display: inline-block;
 }
 
-.parameterForm{
-    text-align: center;
-}
-
-.parameterForm ul li{
-    list-style-type: none;
+.parameterData{
+    display: inline-block;
 }

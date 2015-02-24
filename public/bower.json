@@ -25,6 +25,8 @@
     "echarts-optimized": "*",
     "fontawesome": "~4.3.0",
     "datatables": "~1.10.5",
-    "sb-admin-v2": "~0.1.0"
+    "sb-admin-v2": "~0.1.0",
+    "parsleyjs": "~2.0.7",
+    "echarts": "~2.2.0"
   }
 }

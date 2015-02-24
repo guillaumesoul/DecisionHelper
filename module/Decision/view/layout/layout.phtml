@@ -17,10 +17,8 @@
         ->prependStylesheet($this->basePath() . './bower_components/font-awesome/css/font-awesome.min.css')
         ->prependStylesheet($this->basePath() . './css/bootstrap.min.css')
         ->prependStylesheet($this->basePath() . './css/style.css')
-        ->prependStylesheet($this->basePath() . './bower_components/sb-admin-v2/css/sb-admin.css')?>
-
-
-
+        ->prependStylesheet($this->basePath() . './bower_components/sb-admin-v2/css/sb-admin.css')
+        ->prependStylesheet($this->basePath() . './bower_components/parsleyjs/src/parsley.css')?>
 </head>
 <body>
 <div class="container">
@@ -119,14 +117,14 @@
 </div>
 <!--<div class="container">
     <?php /*echo $this->content; */?>
-    <hr>
-    <footer>
-        Footer
-    </footer>
 </div>-->
-<script src="./bower_components/jquery/dist/jquery.min.js"></script>
+
+
+<script src="./js/jquery.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
-<script src="./bower_components/sb-admin-v2/js/sb-admin.js"></script>
+<script src="./js/decision/create.js"></script>
+<script src="./bower_components/parsleyjs/dist/parsley.js"></script>
+<script src="./bower_components/echarts-optimized/dist/dist/echarts-all.js"></script>
 <!-- DataTable Javascript -->
 </body>
 </html>

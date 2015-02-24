@@ -35,8 +35,28 @@ return array(
                 'options' => array(
                     'route'    => '/create',
                     'defaults' => array(
-                        'controller' => 'Decision\Controller\Index',
+                        'controller' => 'Decision\Controller\Creation',
                         'action'     => 'create',
+                    ),
+                ),
+            ),
+            'getParameterData' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/getParameterData',
+                    'defaults' => array(
+                        'controller' => 'Decision\Controller\Creation',
+                        'action'     => 'getParameterData',
+                    ),
+                ),
+            ),
+            'charts' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/charts',
+                    'defaults' => array(
+                        'controller' => 'Decision\Controller\Charts',
+                        'action'     => 'index',
                     ),
                 ),
             ),
@@ -53,7 +73,9 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Decision\Controller\Index' => 'Decision\Controller\IndexController'
+            'Decision\Controller\Index' => 'Decision\Controller\IndexController',
+            'Decision\Controller\Creation' => 'Decision\Controller\CreationController',
+            'Decision\Controller\Charts' => 'Decision\Controller\ChartsController'
         ),
     ),
     'view_manager' => array(

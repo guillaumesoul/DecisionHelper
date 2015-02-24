@@ -1,0 +1,47 @@
+<div id="page-wrapper">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">Create a decision analysis</h3>
+        </div>
+        <div class="panel-body">
+            <div>Write down the parameters that will affect your decision</div><hr>
+
+            <div>
+                    <div class="row" id="parameterForm">
+                        <div class="form-group col-xs-4">
+                            <label class="control-label">NOM</label>
+                            <input type="text" class="form-control col-xs-3 parameterName" placeholder="NOM"/>
+                        </div>
+                        <!--<div class="form-group col-xs-3">
+                            <label class="control-label">TYPE</label>
+                            <input type="text" class="form-control parameterType" placeholder="TYPE"/>
+                        </div>-->
+                        <div class="form-group col-xs-4">
+                            <label class="control-label">VALUE</label>
+                            <input type="text" class="form-control parameterValue" placeholder="VALUE"/>
+                            <input type="text" class="form-control parameterMinValue" placeholder="MIN VALUE"/>
+                            <input type="text" class="form-control parameterMaxValue" placeholder="MAX VALUE"/>
+                        </div>
+                        <div class="form-group col-xs-4">
+                            <label class="control-label">UNIT</label>
+                            <input type="text" class="form-control parameterUnit" placeholder="UNITS"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button class="btn btn-default addParameter">Add Parameter</button>
+                    </div>
+            </div>
+            <hr>
+
+
+            <div>
+                <h4>List of parameters</h4><hr>
+                <button class="btn btn-default" id="getAllParametersData">Enregistrer vos paramètres</button>
+                <div id="parametersList">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
