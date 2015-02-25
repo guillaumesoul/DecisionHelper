@@ -24,7 +24,7 @@ class CreationController extends AbstractActionController
         $request = $this->getRequest();
         $parameterData = array(
             "parameterName" => $request->getPost('parameterName'),
-            "parameterValue" => $request->getPost('parameterValue'),
+            //"parameterValue" => $request->getPost('parameterValue'),
             "parameterMinValue" => $request->getPost('parameterMinValue'),
             "parameterMaxValue" => $request->getPost('parameterMaxValue'),
             "parameterUnit" => $request->getPost('parameterUnit')

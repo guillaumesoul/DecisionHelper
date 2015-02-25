@@ -1,81 +1,7 @@
 $(document).ready(function(){
 
     // configure for module loader
-    require.config({
-        paths: {
-            echarts: './bower_components/echarts/build/dist'
-        }
-    });
 
-    // use
-    require(
-        [
-            'echarts',
-            'echarts/chart/radar' // require the specific chart type
-        ],
-        function (ec) {
-            // Initialize after dom ready
-            var myChart = ec.init(document.getElementById('main'));
-
-
-            option = {
-                title : {
-                    text: '（Budget vs spending）',
-                    subtext: ''
-                },
-                tooltip : {
-                    trigger: 'axis'
-                },
-                legend: {
-                    orient : 'vertical',
-                    x : 'right',
-                    y : 'bottom',
-                    data:['（Allocated Budget）','（Actual Spending）']
-                },
-                toolbox: {
-                    show : true,
-                    feature : {
-                        mark : {show: true},
-                        dataView : {show: true, readOnly: false},
-                        restore : {show: true},
-                        saveAsImage : {show: true}
-                    }
-                },
-                polar : [
-                    {
-                        indicator : [
-                            { text: '（sales）', max: 6000},
-                            { text: '（Administration）', max: 16000},
-                            { text: '（Information Techology）', max: 30000},
-                            { text: '（Customer Support）', max: 38000},
-                            { text: '（Development）', max: 52000},
-                            { text: '（Marketing）', max: 25000}
-                        ]
-                    }
-                ],
-                calculable : true,
-                series : [
-                    {
-                        name: '（Budget vs spending）',
-                        type: 'radar',
-                        data : [
-                            {
-                                value : [4300, 10000, 28000, 35000, 50000, 19000],
-                                name : '（Allocated Budget）'
-                            },
-                            {
-                                value : [5000, 14000, 28000, 31000, 42000, 21000],
-                                name : '（Actual Spending）'
-                            }
-                        ]
-                    }
-                ]
-            };
-
-            // Load data into the ECharts instance
-            myChart.setOption(option);
-        }
-    );
 
     //$('#parameterForm').parsley();
 
@@ -89,7 +15,7 @@ $(document).ready(function(){
 
         var parameterName = $('.parameterName').val();
         //var parameterType = $('.parameterType').val();
-        var parameterValue = $('.parameterValue').val();
+        //var parameterValue = $('.parameterValue').val();
         var parameterMinValue = $('.parameterMinValue').val();
         var parameterMaxValue = $('.parameterMaxValue').val();
         var parameterUnit = $('.parameterUnit').val();
@@ -100,7 +26,7 @@ $(document).ready(function(){
             url : './getParameterData',
             data: {
                 parameterName: parameterName,
-                parameterValue: parameterValue,
+                //parameterValue: parameterValue,
                 parameterMinValue: parameterMinValue,
                 parameterMaxValue: parameterMaxValue,
                 parameterUnit: parameterUnit
@@ -112,31 +38,37 @@ $(document).ready(function(){
                 var myhtml = setDisplayParameterData(parsedData);
                 $('#parametersList').append(myhtml);
                 var enfant = $("#parametersList").children();
-                $(".parameterData").each(function(index){
-                    console.log( index + ": " + $( this ) );
-                    console.log($( this ));
-                })
-                //console.log(enfant);
             }
         });
 
-        /*var myhtml = setDisplayParameterData(parameterData);
-        $('#parametersList').append(myhtml);*/
     });
 
+    /*
+    * Get the parameters data for all the parameters previously entered by the user
+    * */
     $("#getAllParametersData").on('click', function(){
-        var mesdonnes = $("#parametersList").text();
-        console.log(mesdonnes);
+        var allParametersData = new Array();
+        var parametersData = new Array();
+        $(".parameterData").each(function(index){
+            var i = index;
+            $(".parameterData span").each(function(i){
+                parametersData.push("parameter"+i);
+                parametersData.push($(this).text());
+            });
+            allParametersData.push(parametersData);
+        });
+
+        console.log(allParametersData);
     })
 });
 
 function setDisplayParameterData(parameterData){
     var htmlCode = '<div class="parameterData col-xs-3">';
-    htmlCode += ("<label>NAME : </label><span>"+parameterData["parameterName"]+"</span><br>");
-    htmlCode += ("<label>VALUE : </label><span>"+parameterData["parameterValue"]+"</span><br>");
-    htmlCode += ("<label>MIN VALUE : </label><span>"+parameterData["parameterMinValue"]+"</span><br>");
-    htmlCode += ("<label>MAX VALUE : </label><span>"+parameterData["parameterMaxValue"]+"</span><br>");
-    htmlCode += ("<label>UNIT : </label><span>"+parameterData["parameterUnit"]+"</span><br>");
+    htmlCode += ("<label>NAME : </label><span class='paramName'>"+parameterData["parameterName"]+"</span><br>");
+    //htmlCode += ("<label>VALUE : </label><span>"+parameterData["parameterValue"]+"</span><br>");
+    htmlCode += ("<label>MIN VALUE : </label><span class='paramMinValue'>"+parameterData["parameterMinValue"]+"</span><br>");
+    htmlCode += ("<label>MAX VALUE : </label><span class='paramMaxValue'>"+parameterData["parameterMaxValue"]+"</span><br>");
+    htmlCode += ("<label>UNIT : </label><span class='paramUnit'>"+parameterData["parameterUnit"]+"</span><br>");
     htmlCode += ('</div>');
     return htmlCode;
 }

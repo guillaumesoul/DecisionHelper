@@ -9,4 +9,6 @@ body {
 
 .parameterData{
     display: inline-block;
+    margin: 10px;
+    background-color: #46b8da;
 }

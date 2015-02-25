@@ -15,6 +15,7 @@ class ChartsController extends AbstractActionController
 {
     public function indexAction()
     {
+        $this->layout()->setTemplate('layout/layout-chart');
         return new ViewModel();
     }
 
