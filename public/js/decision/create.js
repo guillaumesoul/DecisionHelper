@@ -34,7 +34,7 @@ $(document).ready(function(){
         }
     });
 
-    $('#parameterForm').submit(function(e) {
+    $('#decisionForm').submit(function(e) {
         e.preventDefault();
         if ( $(this).parsley().isValid() ) {
             $.ajax({

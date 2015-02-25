@@ -94,6 +94,20 @@ return array(
             __DIR__ . '/../view',
         ),
     ),
+    'doctrine' => array(
+        'driver' => array(
+            'entity_driver' => array(
+                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'cache' => 'array',
+                'paths' => array(__DIR__ . '/../src/Decision/Entity')
+            ),
+            'orm_default' => array(
+                'drivers' => array(
+                    'Decision\Entity' =>  'entity_driver'
+                ),
+            ),
+        ),
+    ),
     // Placeholder for console routes
     'console' => array(
         'router' => array(
