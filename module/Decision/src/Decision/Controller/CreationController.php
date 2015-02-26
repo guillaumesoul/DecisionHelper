@@ -11,8 +11,16 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Response;
 
+use Decision\Entity\ItmDecision;
+use Decision\Entity\ItmParameter;
+
 class CreationController extends AbstractActionController
 {
+
+    /**
+     * @var Doctrine\ORM\EntityManager
+     */
+    protected $em;
 
     public function createAction()
     {
@@ -24,7 +32,6 @@ class CreationController extends AbstractActionController
         $request = $this->getRequest();
         $parameterData = array(
             "parameterName" => $request->getPost('parameterName'),
-            //"parameterValue" => $request->getPost('parameterValue'),
             "parameterMinValue" => $request->getPost('parameterMinValue'),
             "parameterMaxValue" => $request->getPost('parameterMaxValue'),
             "parameterUnit" => $request->getPost('parameterUnit')
@@ -35,6 +42,28 @@ class CreationController extends AbstractActionController
     }
 
     public function decisionCreateAction(){
+        $request = $this->getRequest();
+        $decisionData = array(
+            "decisionName" => $request->getPost('decisionName'),
+            "parametersData" => $request->getPost('parametersData')
+        );
 
+        $decision = new ItmDecision();
+        $em = $this->getEntityManager();
+        $repo = $this->getEntityManager()->getRepository('Decision\Entity\ItmParameter');
+
+        $parameter = new ItmParameter();
+        $parameter->setParameterName("test persist");
+        $em->persist($parameter);
+
+        $response = new Response();
+        return $response;
+    }
+
+    public function getEntityDevwinManager() {
+        if (null === $this->em) {
+            $this->em = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+        }
+        return $this->em;
     }
 }

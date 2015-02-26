@@ -1,8 +1,5 @@
 $(document).ready(function(){
 
-    //$('#parameterForm').parsley();
-    //$('#parameterForm').isValid();
-
     $('#parameterForm').submit(function(e) {
         e.preventDefault();
         if ( $(this).parsley().isValid() ) {
@@ -11,7 +8,6 @@ $(document).ready(function(){
             var parameterMinValue = $('.parameterMinValue').val();
             var parameterMaxValue = $('.parameterMaxValue').val();
             var parameterUnit = $('.parameterUnit').val();
-            //parameterData.push(parameterName,parameterValue,parameterMinValue,parameterMaxValue,parameterUnit);
 
             $.ajax({
                 type : "POST",
@@ -29,24 +25,25 @@ $(document).ready(function(){
                 }
             });
         }
+        $(this)[0].reset();
     });
 
     $('#decisionForm').submit(function(e) {
         e.preventDefault();
         if ( $(this).parsley().isValid() && $('.parameterData').length > 0 ) {
-            var decisionData = gelAllParametersData();
-            /*$.ajax({
+            var parametersData = gelAllParametersData();
+            var decisionName = $(".decisionName ").val();
+            $.ajax({
                 type : "POST",
                 url : './decision/create',
                 data: {
+                    decisionName: decisionName,
+                    parametersData: parametersData
                 },
                 success : function(data,xhr) {
-
-                },
-                error: function(){
-                    console.log('error create decision');
+                    var parsedData = JSON.parse(data);
                 }
-            });*/
+            });
         }
     });
 });
@@ -63,13 +60,13 @@ function setDisplayParameterData(parameterData){
 
 function gelAllParametersData(){
     var allParametersData = new Array();
-    var parametersData = new Array();
+
     $(".parameterData").each(function(index){
+        var parametersData = new Array();
         var i = index;
-        //parametersData.push("parameter"+i);
-        $(".parameterData span").each(function(i){
-            console.log($(this).attr('class'));
-            //parametersData.push($(this).text());
+        parametersData.push("parameter"+i);
+        $(this).find('span').each(function(i){
+            parametersData.push($(this).text());
         });
         allParametersData.push(parametersData);
     });
