@@ -50,6 +50,16 @@ return array(
                     ),
                 ),
             ),
+            'decisionCreate' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/decision/create',
+                    'defaults' => array(
+                        'controller' => 'Decision\Controller\Creation',
+                        'action'     => 'decisionCreate',
+                    ),
+                ),
+            ),
             'charts' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(

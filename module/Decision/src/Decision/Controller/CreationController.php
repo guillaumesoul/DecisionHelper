@@ -33,4 +33,8 @@ class CreationController extends AbstractActionController
         $response->setContent(json_encode($parameterData));
         return $response;
     }
+
+    public function decisionCreateAction(){
+
+    }
 }
