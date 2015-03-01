@@ -46,6 +46,17 @@ $(document).ready(function(){
             });
         }
     });
+
+    $("#testButton").click(function(){
+        console.log("c'est parti");
+        $.ajax({
+            type : "POST",
+            url : './persistance',
+            success : function(data,xhr) {
+                console.log("persistance ok");
+            }
+        });
+    });
 });
 
 function setDisplayParameterData(parameterData){

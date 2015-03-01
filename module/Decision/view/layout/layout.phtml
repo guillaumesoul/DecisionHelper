@@ -18,7 +18,8 @@
         ->prependStylesheet($this->basePath() . './css/bootstrap.min.css')
         ->prependStylesheet($this->basePath() . './css/style.css')
         ->prependStylesheet($this->basePath() . './bower_components/sb-admin-v2/css/sb-admin.css')
-        ->prependStylesheet($this->basePath() . './bower_components/parsleyjs/src/parsley.css')?>
+        ->prependStylesheet($this->basePath() . './bower_components/parsleyjs/src/parsley.css')
+        ->prependStylesheet($this->basePath() . './bower_components/datatables/media/css/jquery.dataTables.css')?>
 </head>
 <body>
 <div class="container">
@@ -92,11 +93,11 @@
                         <a href="./create"><i class="fa fa-edit fa-fw"></i> Create decision</a>
                     </li>
                     <li>
-                        <a href="./charts"><i class="fa fa-bar-chart-o fa-fw"></i> Charts</a>
-                        <!-- /.nav-second-level -->
+                        <a href="./table"><i class="fa fa-table fa-fw"></i> Tables</a>
                     </li>
                     <li>
-                        <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
+                        <a href="./charts"><i class="fa fa-bar-chart-o fa-fw"></i> Charts</a>
+                        <!-- /.nav-second-level -->
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages</a>
@@ -122,7 +123,9 @@
 
 <script src="./js/jquery.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
+<script src="./bower_components/datatables/media/js/jquery.dataTables.js"></script>
 <script src="./js/decision/create.js"></script>
+<script src="./js/decision/table.js"></script>
 <script src="./bower_components/parsleyjs/dist/parsley.js"></script>
 <script src="./bower_components/echarts/build/dist/echarts.js"></script>
 <script src="./bower_components/echarts/build/dist/echarts-all.js"></script>

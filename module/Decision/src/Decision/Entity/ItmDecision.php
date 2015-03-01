@@ -31,7 +31,7 @@ class ItmDecision
     /**
      * @var string
      *
-     * @ORM\Column(name="decision_creation_date", type="string", length=45, nullable=true)
+     * @ORM\Column(name="decision_creattion_date", type="string", length=45, nullable=true)
      */
     private $decisionCreattionDate;
 

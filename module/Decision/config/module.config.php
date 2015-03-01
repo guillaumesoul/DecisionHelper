@@ -60,6 +60,26 @@ return array(
                     ),
                 ),
             ),
+            'decisionTable' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/table',
+                    'defaults' => array(
+                        'controller' => 'Decision\Controller\Table',
+                        'action'     => 'table',
+                    ),
+                ),
+            ),
+            'persistance' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/persistance',
+                    'defaults' => array(
+                        'controller' => 'Decision\Controller\Creation',
+                        'action'     => 'persistance',
+                    ),
+                ),
+            ),
             'charts' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
@@ -85,6 +105,7 @@ return array(
         'invokables' => array(
             'Decision\Controller\Index' => 'Decision\Controller\IndexController',
             'Decision\Controller\Creation' => 'Decision\Controller\CreationController',
+            'Decision\Controller\Table' => 'Decision\Controller\TableController',
             'Decision\Controller\Charts' => 'Decision\Controller\ChartsController'
         ),
     ),
