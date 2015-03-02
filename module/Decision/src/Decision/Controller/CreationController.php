@@ -74,37 +74,21 @@ class CreationController extends AbstractActionController
         $response = new Response();
         $decisionId = $decision->getDecisionId();
         $response = json_encode($decisionId);
-        return $response;
+        //return $response;
+
+        /*$this->redirect()->toRoute('table',
+            array('action' => 'table'), array('decisionId' => $decisionId));*/
+        $this->redirect()->toRoute('home');
+        $this->_helper->redirector('table','TableController','Decision',array('id'=>'id123'));
+        //$this->redirect()->toUrl('http://google.com');
+        $lala = "fdsfds";
     }
 
     public function persistanceAction(){
 
-        /*$test = new Test();
-        $test->setNom("nom test");
-        $em = $this->getEntityManager();
-        $em->persist($test);
-        $em->flush();*/
-
-        $decision = new ItmDecision();
-        $decision->setDecisionAuthorId("dsd");
-        $decision->setDecisionName("decision a");
-        $decision->setDecisionCreattionDate("now");
-
-        $parameter1 = new ItmParameter();
-        $parameter2 = new ItmParameter();
-        $parameter1->setParameterName("t1");
-        $parameter1->setParameterDecision($decision);
-        $parameter2->setParameterName("t2");
-        $parameter2->setParameterDecision($decision);
-
-
-        $em = $this->getEntityManager();
-        $em->persist($decision);
-        /*$em->persist($parameter1);
-        $em->persist($parameter2);*/
-        $em->flush();
-
-        return "pipou";
+        //$this->redirect()->toRoute('home');
+        $this->redirect()->toUrl('http://google.com');
+        //$this->_helper->redirector('table','TableController','Decision',array('id'=>'id123'));
     }
 
     public function tableAction(){

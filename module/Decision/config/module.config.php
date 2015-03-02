@@ -60,7 +60,7 @@ return array(
                     ),
                 ),
             ),
-            'decisionTable' => array(
+            'table' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route'    => '/table',

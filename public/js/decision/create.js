@@ -41,7 +41,9 @@ $(document).ready(function(){
                     parametersData: parametersData
                 },
                 success : function(data,xhr) {
-                    var parsedData = JSON.parse(data);
+                    console.log("succes creation");
+                    //document.location.href = './table';
+
                 }
             });
         }
