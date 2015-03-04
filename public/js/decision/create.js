@@ -42,7 +42,8 @@ $(document).ready(function(){
                 },
                 success : function(data,xhr) {
                     console.log("succes creation");
-                    //document.location.href = './table';
+                    console.log(data.decisionId);
+                    document.location.href = './table?param='+data.decisionId;
 
                 }
             });

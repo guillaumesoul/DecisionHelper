@@ -18,6 +18,15 @@ use Decision\Entity\ItmParameter;
 class TableController extends AbstractActionController{
 
     public function tableAction(){
+
+        //$router = $this->params()->fromRoute();
+        //$em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $decisionId = $this->getRequest();
+        $decisionId = $_REQUEST['param'];
+        $test = "pipou";
+        //$page = $em->getRepository('\DoctrineTest\Entity\Page')->findOneById($router['id']);
+
+        $this->layout()->setTemplate('layout/layout');
         return new ViewModel();
 
     }

@@ -10,6 +10,7 @@ namespace Decision\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Response;
+use Zend\View\Model\JsonModel;
 
 use Decision\Entity\ItmDecision;
 use Decision\Entity\ItmParameter;
@@ -42,7 +43,8 @@ class CreationController extends AbstractActionController
         return $response;
     }
 
-    public function decisionCreateAction(){
+    public function decisionCreateAction()
+    {
 
         $request = $this->getRequest();
         $decisionData = array(
@@ -59,7 +61,7 @@ class CreationController extends AbstractActionController
 
         $em->persist($decision);
 
-        foreach ($decisionData['parametersData'] as $parameterData){
+        foreach ($decisionData['parametersData'] as $parameterData) {
             $parameter = new ItmParameter();
             $parameter->setParameterName($parameterData[0]);
             $parameter->setParameterMinValue($parameterData[1]);
@@ -71,17 +73,22 @@ class CreationController extends AbstractActionController
 
         $em->flush();
 
+        /*$result = new JsonModel(array(
+            'some_parameter' => 'some value',
+            'success'=>true,
+        ));
+
+        return $result;*/
+
         $response = new Response();
         $decisionId = $decision->getDecisionId();
         $response = json_encode($decisionId);
-        //return $response;
+        return new JsonModel(array(
+            'decisionId' => $decisionId,
+        ));
+        //return $decisionId;
 
-        /*$this->redirect()->toRoute('table',
-            array('action' => 'table'), array('decisionId' => $decisionId));*/
-        $this->redirect()->toRoute('home');
-        $this->_helper->redirector('table','TableController','Decision',array('id'=>'id123'));
-        //$this->redirect()->toUrl('http://google.com');
-        $lala = "fdsfds";
+
     }
 
     public function persistanceAction(){
