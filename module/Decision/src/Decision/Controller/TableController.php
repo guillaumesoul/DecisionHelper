@@ -22,7 +22,7 @@ class TableController extends AbstractActionController{
         //$router = $this->params()->fromRoute();
         //$em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         $decisionId = $this->getRequest();
-        $decisionId = $_REQUEST['param'];
+        //$decisionId = $_REQUEST['param'];
         $test = "pipou";
         //$page = $em->getRepository('\DoctrineTest\Entity\Page')->findOneById($router['id']);
 

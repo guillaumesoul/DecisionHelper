@@ -63,7 +63,7 @@ return array(
             'table' => array(
                 'type' => 'segment',
                 'options' => array(
-                    'route'    => '/table',
+                    'route'    => '/table/[:id]',
                     'constraints' => array(
                         'id' => '[0-9]+',
                     ),

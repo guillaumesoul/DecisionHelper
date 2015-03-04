@@ -43,7 +43,8 @@ $(document).ready(function(){
                 success : function(data,xhr) {
                     console.log("succes creation");
                     console.log(data.decisionId);
-                    document.location.href = './table?param='+data.decisionId;
+                    //document.location.href = './table?param='+data.decisionId;
+                    document.location.href = './table/'+data.decisionId;
 
                 }
             });
