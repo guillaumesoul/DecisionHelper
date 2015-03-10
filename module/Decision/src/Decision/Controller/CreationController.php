@@ -73,35 +73,24 @@ class CreationController extends AbstractActionController
 
         $em->flush();
 
-        /*$result = new JsonModel(array(
-            'some_parameter' => 'some value',
-            'success'=>true,
-        ));
-
-        return $result;*/
-
         $response = new Response();
         $decisionId = $decision->getDecisionId();
         $response = json_encode($decisionId);
         return new JsonModel(array(
             'decisionId' => $decisionId,
         ));
-        //return $decisionId;
-
 
     }
 
-    public function persistanceAction(){
+    /*public function persistanceAction(){
 
-        //$this->redirect()->toRoute('home');
         $this->redirect()->toUrl('http://google.com');
-        //$this->_helper->redirector('table','TableController','Decision',array('id'=>'id123'));
     }
 
     public function tableAction(){
         return new ViewModel();
 
-    }
+    }*/
 
     public function getEntityManager() {
         if (null === $this->em) {

@@ -19,15 +19,23 @@ class TableController extends AbstractActionController{
 
     public function tableAction(){
 
-        //$router = $this->params()->fromRoute();
-        //$em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        $decisionId = $this->getRequest();
-        //$decisionId = $_REQUEST['param'];
+        $router = $this->params()->fromRoute();
+        $decisionId = $router['id'];
+        $decision = $this->getEntityManager()->getRepository('Decision\Entity\ItmDecision')->findOneByDecisionId($decisionId);
+        $parameters = $this->getEntityManager()->getRepository('Decision\Entity\ItmParameter')->findByParameterDecision($decisionId);
         $test = "pipou";
-        //$page = $em->getRepository('\DoctrineTest\Entity\Page')->findOneById($router['id']);
-
         $this->layout()->setTemplate('layout/layout');
-        return new ViewModel();
+        return new ViewModel(array(
+            'decision' => $decision,
+            'parameters' => $parameters
+        ));
 
+    }
+
+    public function getEntityManager() {
+        if (null === $this->em) {
+            $this->em = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+        }
+        return $this->em;
     }
 }
