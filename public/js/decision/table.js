@@ -1,20 +1,39 @@
 $(document).ready(function() {
 
-    var table = $("#parameterTable").dataTable({
+    var parameterTable = $("#parameterTable").dataTable({
         "searching": false,
         "paging": false,
         "ordering": false
     });
 
-    /*$(".saveParametersInput").on('click', function(){
-        console.log("save parameters input");
-        console.log($(this)[0].parentNode);
-    });*/
+    $('button').click( function() {
 
-    $('#parameterTable tbody').on( 'click', 'tr', function () {
-        console.log(table);
-        console.log(table._fnGetRowElements());
-        //var rowData = table.row( this ).data();
-        //console.log(rowData);
+        var data = $('.parameterValue');
+        var parameterDataList = new Array();
+        var parameterData = new Array();
+
+        data.each(function(){
+            parameterData['parameterId'] = $(this)[0].getAttribute("parameterId");
+            parameterData['parameterName'] = $(this)[0].getAttribute("parameterName");
+            parameterData['parameterMinValue'] = $(this)[0].getAttribute("parameterMinValue");
+            parameterData['parameterMaxValue'] = $(this)[0].getAttribute("parameterMaxValue");
+            parameterData['parameterValue'] = $(this).val();
+            parameterDataList.push(parameterData);
+            parameterData = [];
+
+        });
+        console.log(parameterDataList);
+
+        
+
+        return false;
     } );
+
+    //parameterTableCalcul
+    var parameterTableCalcul = $("#parameterTableCalcul").dataTable({
+        "searching": false,
+        "paging": false,
+        "ordering": false
+    });
+
 });

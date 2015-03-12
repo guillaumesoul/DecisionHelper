@@ -43,7 +43,6 @@ $(document).ready(function(){
                 success : function(data,xhr) {
                     console.log("succes creation");
                     console.log(data.decisionId);
-                    //document.location.href = './table?param='+data.decisionId;
                     document.location.href = './table/'+data.decisionId;
 
                 }
@@ -51,7 +50,7 @@ $(document).ready(function(){
         }
     });
 
-    $("#testButton").click(function(){
+    /*$("#testButton").click(function(){
         console.log("c'est parti");
         $.ajax({
             type : "POST",
@@ -60,7 +59,7 @@ $(document).ready(function(){
                 console.log("persistance ok");
             }
         });
-    });
+    });*/
 });
 
 function setDisplayParameterData(parameterData){
@@ -79,7 +78,7 @@ function gelAllParametersData(){
     $(".parameterData").each(function(index){
         var parametersData = new Array();
         var i = index;
-        parametersData.push("parameter"+i);
+        //parametersData.push("parameter"+i);
         $(this).find('span').each(function(i){
             parametersData.push($(this).text());
         });

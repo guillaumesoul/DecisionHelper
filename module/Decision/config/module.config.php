@@ -73,7 +73,7 @@ return array(
                     ),
                 ),
             ),
-            'persistance' => array(
+            /*'persistance' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(
                     'route'    => '/persistance',
@@ -82,7 +82,7 @@ return array(
                         'action'     => 'persistance',
                     ),
                 ),
-            ),
+            ),*/
             'charts' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(

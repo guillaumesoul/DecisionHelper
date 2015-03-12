@@ -23,7 +23,6 @@ class TableController extends AbstractActionController{
         $decisionId = $router['id'];
         $decision = $this->getEntityManager()->getRepository('Decision\Entity\ItmDecision')->findOneByDecisionId($decisionId);
         $parameters = $this->getEntityManager()->getRepository('Decision\Entity\ItmParameter')->findByParameterDecision($decisionId);
-        $test = "pipou";
         $this->layout()->setTemplate('layout/layout');
         return new ViewModel(array(
             'decision' => $decision,

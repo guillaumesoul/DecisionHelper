@@ -6,29 +6,71 @@
         <div class="panel-body">
             <!--datatable to put here-->
             <table cellpadding="0" cellspacing="0" border="0" class="display" id="parameterTable">
-                <thead>
+                <thead >
                     <?php
                     $i = 0;
                     foreach ($this->parameters as $parameter) {
-                        echo '<th>'.$parameter->getParameterName().'</th>';
+                        echo
+                            '<th>'.
+                                '<div class="">'.$parameter->getParameterName().'</div>'.
+                                '<div>min : '.$parameter->getParameterMinValue().'</div>'.
+                                '<div>max : '.$parameter->getParameterMaxValue().'</div>'.
+                            '</th>';
                         $i++;
                     }
                     ?>
-                    <th>Save</th>
                 </thead>
                 <tbody>
                 <tr>
                     <?php
                     $i = 0;
                     foreach ($this->parameters as $parameter) {
-                        echo '<td><input type="number" class="form-control"></td>';
+                        echo
+                            '<td>
+                                <input type="number" class="form-control parameterValue"
+                                parameterId="'.$parameter->getParameterId().'"
+                                parameterName="'.$parameter->getParameterName().'"
+                                parameterMinValue="'.$parameter->getParameterMinValue().'"
+                                parameterMaxValue="'.$parameter->getParameterMaxValue().'" />
+                            </td>';
                         $i++;
                     }
                     ?>
-                    <td><button class="btn btn-default saveParametersInput">SAVE</button></td>
                 </tr>
                 </tbody>
             </table>
+            <button class="btn btn-default saveParametersInput">SAVE</button>
+            <hr>
+            <div>
+                <table cellpadding="0" cellspacing="0" border="0" class="display" id="parameterTableCalcul">
+                    <thead >
+                    <?php
+                    $i = 0;
+                    foreach ($this->parameters as $parameter) {
+                        echo
+                            '<th>'.
+                            '<div class="">'.$parameter->getParameterName().'</div>'.
+                            '</th>';
+                        $i++;
+                    }
+                    ?>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <?php
+                        $i = 0;
+                        foreach ($this->parameters as $parameter) {
+                            echo
+                                '<td>
+                                <input type="number" class="form-control parameterCalculatedValue" parameterId="'.$parameter->getParameterId().'" value=""/>
+                            </td>';
+                            $i++;
+                        }
+                        ?>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div>
 

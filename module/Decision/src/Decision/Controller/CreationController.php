@@ -82,16 +82,6 @@ class CreationController extends AbstractActionController
 
     }
 
-    /*public function persistanceAction(){
-
-        $this->redirect()->toUrl('http://google.com');
-    }
-
-    public function tableAction(){
-        return new ViewModel();
-
-    }*/
-
     public function getEntityManager() {
         if (null === $this->em) {
             $this->em = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
