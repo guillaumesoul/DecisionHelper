@@ -105,27 +105,27 @@ function calculateParameterData(parameterData){
 function setEchartOption(){
 
     var test;
-    var polar="";
-    /*for	(var index = 0; index < paramatersData.length; index++) {
-        test = paramatersData[index];
-        polar += "{text: '"+paramatersData[index]['parameterName']+"', max: "+1+"},";
-        console.log(polar);
-    }*/
-
-    var test = 6000;
-    var test2 = {
-        text: 'zaza', max: test,
-        text: 'zozo', max: 16000,
-        text: 'zuzu', max: 30000,
-        text: 'zizi', max: 38888,
-        text: 'zeze', max: 52000,
-        text: 'popo', max: 25000
-    };
+    var polarString="[";
+    for	(var index = 0; index < 6; index++) {
+        //test = paramatersData[index];
+        console.log(index);
+        if (index <= 4){
+            polarString += '{"text": '+index+', "max": "50000"},';
+            console.log("inferieur a 5");
+        }else {
+            polarString += '{"text": '+index+', "max": "50000"}';
+            console.log(polarString);
+        }
+        //console.log(polar);
+    }
+    polarString += "]";
+    console.log(polarString);
+    var JSONPolar = JSON.parse(polarString);
 
     var JSONString = '[{"text":"sales","max":6000},{"text":"tytty","max":20000},{"text":"papa","max":30000},{"text":"sales","max":50000},{"text":"zaza","max":60000},{"text":"popo","max":30000}]';
 
     var JSONObject = JSON.parse(JSONString);
-    console.log(JSONObject);      // Dump all data of the Object in the console
+    //console.log(JSONObject);      // Dump all data of the Object in the console
     //alert(JSONObject[4]["max"]); // Access Object data
 
     option = {
@@ -153,7 +153,7 @@ function setEchartOption(){
         },
         polar: [
             {
-                indicator: JSONObject
+                indicator: JSONPolar
             }
         ],
         calculable: true,
