@@ -10,6 +10,7 @@ namespace Decision\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\Json;
 
 class ChartsController extends AbstractActionController
 {
@@ -17,6 +18,7 @@ class ChartsController extends AbstractActionController
     {
         $this->layout()->setTemplate('layout/layout-chart');
         return new ViewModel();
+        //return Zend_Json::encode(array('redirect' => '/Decision/ChartsController/index'));
     }
 
 }

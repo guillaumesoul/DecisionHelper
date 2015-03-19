@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+
+
+
+
     var parameterTable = $("#parameterTable").dataTable({
         "searching": false,
         "paging": false,
@@ -15,7 +19,9 @@ $(document).ready(function() {
         "bInfo" : false
     });
 
-    $('button').click( function() {
+    var paramatersData;
+
+    $('.saveParametersInput').click( function() {
 
         //Recuperation des inputs
         var data = $('.parameterValue');
@@ -35,6 +41,8 @@ $(document).ready(function() {
 
         });
 
+        paramatersData = parameterDataList;
+
         //Traitements des inputs calculs des valeurs
         var calculatedDataInputList = $('.parameterCalculatedValue');
         calculatedDataInputList.each(function(indice){
@@ -42,14 +50,43 @@ $(document).ready(function() {
             calculatedDataInputList[indice].value = calculatedParameterValue;
         })
 
-        //Parametrage des options pour le graphique Echarts
-        var options = setEchartOption();
-        
+    });
+
+    $("#chartRedirect").click(function(){
+        console.log("allez on ya va");
+
+        //affichage du chart
+        //$('#myModal').modal('show');
+
+        // configure for module loader
+        require.config({
+            paths: {
+                echarts: '/bower_components/echarts/build/dist'
+            }
+        });
+
+        // use
+        require(
+            [
+                'echarts',
+                'echarts/chart/radar' // require the specific chart type
+            ],
+            function (ec) {
+                // Initialize after dom ready
+                var myChart = ec.init(document.getElementById('main'));
+
+                var options = setEchartOption(paramatersData);
+                // Load data into the ECharts instance
+                myChart.setOption(options);
+            }
+        );
+
     });
 
 
 
 });
+
 
 /*fonction permettant de calculer la note d'un parametre en fonction de ses valeurs min et max*/
 function calculateParameterData(parameterData){
@@ -69,8 +106,63 @@ function calculateParameterData(parameterData){
     return calculatedParameterValue;
 }
 
-function setEchartOption(){
+function setEchartOption(paramatersData){
+
+    console.log(paramatersData.length);
+
     option = {
+        title: {
+            text: '（Budget vs spending）',
+            subtext: ''
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            orient: 'vertical',
+            x: 'right',
+            y: 'bottom',
+            data: ['（Allocated Budget）', '（Actual Spending）']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                mark: {show: true},
+                dataView: {show: true, readOnly: false},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        polar: [
+            {
+                indicator: [
+                    {text: '（sales）', max: 6000},
+                    {text: '（Administration）', max: 16000}
+                ]
+            }
+        ],
+        calculable: true,
+        series: [
+            {
+                name: '（Budget vs spending）',
+                type: 'radar',
+                data: [
+                    {
+                        value: [4300, 10000],
+                        name: '（Allocated Budget）'
+                    },
+                    {
+                        value: [5000, 14000],
+                        name: '（Actual Spending）'
+                    }
+                ]
+            }
+        ]
+    };
+
+
+
+    /*option = {
         title: {
             text: '（Budget vs spending）',
             subtext: ''
@@ -122,7 +214,7 @@ function setEchartOption(){
                 ]
             }
         ]
-    };
+    };*/
 
     return option;
 }
