@@ -53,10 +53,6 @@ $(document).ready(function() {
     });
 
     $("#chartRedirect").click(function(){
-        console.log("allez on ya va");
-
-        //affichage du chart
-        //$('#myModal').modal('show');
 
         // configure for module loader
         require.config({
@@ -75,7 +71,7 @@ $(document).ready(function() {
                 // Initialize after dom ready
                 var myChart = ec.init(document.getElementById('main'));
 
-                var options = setEchartOption(paramatersData);
+                var options = setEchartOption();
                 // Load data into the ECharts instance
                 myChart.setOption(options);
             }
@@ -106,9 +102,31 @@ function calculateParameterData(parameterData){
     return calculatedParameterValue;
 }
 
-function setEchartOption(paramatersData){
+function setEchartOption(){
 
-    console.log(paramatersData.length);
+    var test;
+    var polar="";
+    /*for	(var index = 0; index < paramatersData.length; index++) {
+        test = paramatersData[index];
+        polar += "{text: '"+paramatersData[index]['parameterName']+"', max: "+1+"},";
+        console.log(polar);
+    }*/
+
+    var test = 6000;
+    var test2 = {
+        text: 'zaza', max: test,
+        text: 'zozo', max: 16000,
+        text: 'zuzu', max: 30000,
+        text: 'zizi', max: 38888,
+        text: 'zeze', max: 52000,
+        text: 'popo', max: 25000
+    };
+
+    var JSONString = '[{"text":"sales","max":6000},{"text":"tytty","max":20000},{"text":"papa","max":30000},{"text":"sales","max":50000},{"text":"zaza","max":60000},{"text":"popo","max":30000}]';
+
+    var JSONObject = JSON.parse(JSONString);
+    console.log(JSONObject);      // Dump all data of the Object in the console
+    //alert(JSONObject[4]["max"]); // Access Object data
 
     option = {
         title: {
@@ -135,10 +153,7 @@ function setEchartOption(paramatersData){
         },
         polar: [
             {
-                indicator: [
-                    {text: '（sales）', max: 6000},
-                    {text: '（Administration）', max: 16000}
-                ]
+                indicator: JSONObject
             }
         ],
         calculable: true,
@@ -148,11 +163,11 @@ function setEchartOption(paramatersData){
                 type: 'radar',
                 data: [
                     {
-                        value: [4300, 10000],
+                        value: [4300, 10000, 28000, 35000, 50000, 19000],
                         name: '（Allocated Budget）'
                     },
                     {
-                        value: [5000, 14000],
+                        value: [5000, 14000, 28000, 31000, 42000, 21000],
                         name: '（Actual Spending）'
                     }
                 ]
