@@ -1,9 +1,5 @@
 $(document).ready(function() {
 
-
-
-
-
     var parameterTable = $("#parameterTable").dataTable({
         "searching": false,
         "paging": false,
@@ -54,6 +50,7 @@ $(document).ready(function() {
 
     $("#chartRedirect").click(function(){
 
+
         // configure for module loader
         require.config({
             paths: {
@@ -68,10 +65,11 @@ $(document).ready(function() {
                 'echarts/chart/radar' // require the specific chart type
             ],
             function (ec) {
+                console.log(paramatersData);
                 // Initialize after dom ready
                 var myChart = ec.init(document.getElementById('main'));
 
-                var options = setEchartOption();
+                var options = setEchartOption(paramatersData);
                 // Load data into the ECharts instance
                 myChart.setOption(options);
             }
@@ -102,27 +100,37 @@ function calculateParameterData(parameterData){
     return calculatedParameterValue;
 }
 
-function setEchartOption(){
+/*
+* genere le JSON option necessaire pour l'affichage d'un graphique radar
+* input: tableau d'elements contenant [titre,maxvalue,value]
+* */
+function setEchartOption(paramatersData){
 
-    var test;
+    var titleString = "pipou";
+
+    var JSONString = '[{"text":"sales","max":6000},{"text":"tytty","max":20000},{"text":"papa","max":30000},{"text":"sales","max":50000},{"text":"zaza","max":60000},{"text":"popo","max":30000}]';
     var polarString="[";
-    for	(var index = 0; index < 6; index++) {
-        //test = paramatersData[index];
-        console.log(index);
+    /*for	(var index = 0; index < 6; index++) {
         if (index <= 4){
             polarString += '{"text": '+index+', "max": "50000"},';
-            console.log("inferieur a 5");
         }else {
             polarString += '{"text": '+index+', "max": "50000"}';
-            console.log(polarString);
+        }
+        //console.log(polar);
+    }*/
+    for	(var index = 0; index < paramatersData.length; index++) {
+        console.log(paramatersData[index]['parameterName']);
+        if (index <= 4){
+            polarString += '{"text": "'+paramatersData[index]["parameterName"]+'", "max": "50000"},';
+        }else {
+            polarString += '{"text": "'+paramatersData[index]["parameterName"]+'", "max": "50000"}';
         }
         //console.log(polar);
     }
     polarString += "]";
-    console.log(polarString);
     var JSONPolar = JSON.parse(polarString);
 
-    var JSONString = '[{"text":"sales","max":6000},{"text":"tytty","max":20000},{"text":"papa","max":30000},{"text":"sales","max":50000},{"text":"zaza","max":60000},{"text":"popo","max":30000}]';
+
 
     var JSONObject = JSON.parse(JSONString);
     //console.log(JSONObject);      // Dump all data of the Object in the console
@@ -130,7 +138,7 @@ function setEchartOption(){
 
     option = {
         title: {
-            text: '（Budget vs spending）',
+            text: titleString,
             subtext: ''
         },
         tooltip: {
