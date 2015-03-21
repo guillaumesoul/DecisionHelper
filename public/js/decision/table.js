@@ -36,7 +36,6 @@ $(document).ready(function() {
             parameterData = [];
 
         });
-
         paramatersData = parameterDataList;
 
         //Traitements des inputs calculs des valeurs
@@ -49,23 +48,17 @@ $(document).ready(function() {
     });
 
     $("#chartRedirect").click(function(){
-
-
-        // configure for module loader
         require.config({
             paths: {
                 echarts: '/bower_components/echarts/build/dist'
             }
         });
-
-        // use
         require(
             [
                 'echarts',
                 'echarts/chart/radar' // require the specific chart type
             ],
             function (ec) {
-                console.log(paramatersData);
                 // Initialize after dom ready
                 var myChart = ec.init(document.getElementById('main'));
 
@@ -97,7 +90,10 @@ function calculateParameterData(parameterData){
     }else{
         calculatedParameterValue = -1;
     }
-    return calculatedParameterValue;
+    if (calculatedParameterValue > 1){
+        calculatedParameterValue = 1;
+    }
+    return calculatedParameterValue*100;
 }
 
 /*
@@ -106,35 +102,36 @@ function calculateParameterData(parameterData){
 * */
 function setEchartOption(paramatersData){
 
-    var titleString = "pipou";
+    console.log(paramatersData);
 
-    var JSONString = '[{"text":"sales","max":6000},{"text":"tytty","max":20000},{"text":"papa","max":30000},{"text":"sales","max":50000},{"text":"zaza","max":60000},{"text":"popo","max":30000}]';
+    var titleString = "pipou";
     var polarString="[";
-    /*for	(var index = 0; index < 6; index++) {
-        if (index <= 4){
-            polarString += '{"text": '+index+', "max": "50000"},';
-        }else {
-            polarString += '{"text": '+index+', "max": "50000"}';
-        }
-        //console.log(polar);
-    }*/
     for	(var index = 0; index < paramatersData.length; index++) {
-        console.log(paramatersData[index]['parameterName']);
+        //console.log(paramatersData[index]['parameterName']);
         if (index <= 4){
-            polarString += '{"text": "'+paramatersData[index]["parameterName"]+'", "max": "50000"},';
+            polarString += '{"text": "'+paramatersData[index]["parameterName"]+'", "max": 100},';
         }else {
-            polarString += '{"text": "'+paramatersData[index]["parameterName"]+'", "max": "50000"}';
+            polarString += '{"text": "'+paramatersData[index]["parameterName"]+'", "max": 100}';
         }
-        //console.log(polar);
     }
     polarString += "]";
     var JSONPolar = JSON.parse(polarString);
 
+    var dataString='[{';
+    for	(var i = 0; i < paramatersData.length; i++) {
+        console.log(paramatersData[i]);
+        if (i == 0){
+            dataString += '"value": ['+paramatersData[i]["calculatedParameterValue"]+',';
+        }else if (i == paramatersData.length-1){
+            dataString += paramatersData[i]["calculatedParameterValue"]+'],"name":"serie1"}]';
+        }else{
+            dataString += paramatersData[i]["calculatedParameterValue"]+',';
+        }
+    }
+    var zaza = '[{"value": [100, 00, 100, 100, 100, 100],"name":"bon..."}]';
 
-
-    var JSONObject = JSON.parse(JSONString);
-    //console.log(JSONObject);      // Dump all data of the Object in the console
-    //alert(JSONObject[4]["max"]); // Access Object data
+    var JSONSeries = JSON.parse(dataString);
+    console.log(JSONSeries);
 
     option = {
         title: {
@@ -148,7 +145,7 @@ function setEchartOption(paramatersData){
             orient: 'vertical',
             x: 'right',
             y: 'bottom',
-            data: ['（Allocated Budget）', '（Actual Spending）']
+            data: ['（Allocated Budget）']
         },
         toolbox: {
             show: true,
@@ -161,24 +158,16 @@ function setEchartOption(paramatersData){
         },
         polar: [
             {
+                scale: true,
                 indicator: JSONPolar
             }
         ],
-        calculable: true,
+        //calculable: true,
         series: [
             {
                 name: '（Budget vs spending）',
                 type: 'radar',
-                data: [
-                    {
-                        value: [4300, 10000, 28000, 35000, 50000, 19000],
-                        name: '（Allocated Budget）'
-                    },
-                    {
-                        value: [5000, 14000, 28000, 31000, 42000, 21000],
-                        name: '（Actual Spending）'
-                    }
-                ]
+                data: JSONSeries
             }
         ]
     };
@@ -210,13 +199,14 @@ function setEchartOption(paramatersData){
         },
         polar: [
             {
+                scale: true,
                 indicator: [
-                    {text: '（sales）', max: 6000},
-                    {text: '（Administration）', max: 16000},
-                    {text: '（Information Techology）', max: 30000},
-                    {text: '（Customer Support）', max: 38000},
-                    {text: '（Development）', max: 52000},
-                    {text: '（Marketing）', max: 25000}
+                    {text: '（sales）', min: 0, max: 1000},
+                    {text: '（Administration）', min: 0, max: 1000},
+                    {text: '（Information Techology）', min: 0, max: 1000},
+                    {text: '（Customer Support）', min: 0, max: 1000},
+                    {text: '（Development）', min: 0, max: 1000},
+                    {text: '（Marketing）', min: 0, max: 1000}
                 ]
             }
         ],
@@ -227,11 +217,11 @@ function setEchartOption(paramatersData){
                 type: 'radar',
                 data: [
                     {
-                        value: [4300, 10000, 28000, 35000, 50000, 19000],
+                        value: [500, 610 , 343, 100, 850, 492],
                         name: '（Allocated Budget）'
                     },
                     {
-                        value: [5000, 14000, 28000, 31000, 42000, 21000],
+                        value: [1000, 1000, 1000, 1000, 1000, 1000],
                         name: '（Actual Spending）'
                     }
                 ]
