@@ -39,38 +39,13 @@
                 </tr>
                 </tbody>
             </table>
-            <button class="btn btn-default saveParametersInput">PROCESS VALUES</button>
+            <div class="btn-toolbar">
+                <button class="btn btn-default saveParametersInput">PROCESS VALUES</button>
+                <button class="btn btn-default addRow">ADD A ROW</button>
+            </div>
             <hr>
             <div>
-                <table cellpadding="0" cellspacing="0" border="0" class="display" id="parameterTableCalcul">
-                    <thead >
-                    <?php
-                    $i = 0;
-                    foreach ($this->parameters as $parameter) {
-                        echo
-                            '<th>'.
-                            '<div class="">'.$parameter->getParameterName().'</div>'.
-                            '</th>';
-                        $i++;
-                    }
-                    ?>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <?php
-                        $i = 0;
-                        foreach ($this->parameters as $parameter) {
-                            echo
-                                '<td>
-                                <input type="number" class="form-control parameterCalculatedValue" parameterId="" parameterName="" parameterMinValue="" parameterMaxValue="" parameterValue="" parameterCalculatedValue=""/>
-                            </td>';
-                            $i++;
-                        }
-                        ?>
-                    </tr>
-                    </tbody>
-                </table>
-                <button class="btn btn-default" id="chartRedirect">RADAR IT!</button>
+                <button class="btn btn-default" id="chartGeneration">RADAR IT!</button>
             </div>
         </div>
         <div>
