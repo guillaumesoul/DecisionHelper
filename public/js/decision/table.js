@@ -7,14 +7,6 @@ $(document).ready(function() {
         "bInfo" : false
     });
 
-    //parameterTableCalcul
-    var parameterTableCalcul = $("#parameterTableCalcul").dataTable({
-        "searching": false,
-        "paging": false,
-        "ordering": false,
-        "bInfo" : false
-    });
-
     var paramatersData;
 
     $("#chartGeneration").click(function(){
@@ -26,7 +18,9 @@ $(document).ready(function() {
         var parameterData = new Array();
         var calculatedParameterValue;
 
-        allDataRows.each(function(i){
+        allDataRows.each(function(ind){
+            var serieName = $(this).find('.serieName').val();
+            parametersSerie["serieName"] = serieName;
             var singleSerie = $(this)[0].getElementsByClassName('parameterValue');
             for (var i=0; i<singleSerie.length; i++){
                 parameterData['parameterId'] = singleSerie[i].getAttribute("parameterId");
@@ -37,6 +31,8 @@ $(document).ready(function() {
                 calculatedParameterValue = calculateParameterData(parameterData);
                 parameterData['calculatedParameterValue'] = calculatedParameterValue;
                 parametersSerie.push(parameterData);
+
+                //parametersSerie["parametersData"] = parameterData;
                 parameterData = [];
             }
             allParametersSerie.push(parametersSerie);
@@ -44,26 +40,7 @@ $(document).ready(function() {
         });
 
         setEchartOption2(allParametersSerie);
-
-        //Recuperation des inputs
-        /*var data = $('.parameterValue');
-        var parameterDataList = new Array();
-        var parameterData = new Array();
-        var calculatedParameterValue;
-        data.each(function(){
-            parameterData['parameterId'] = $(this)[0].getAttribute("parameterId");
-            parameterData['parameterName'] = $(this)[0].getAttribute("parameterName");
-            parameterData['parameterMinValue'] = $(this)[0].getAttribute("parameterMinValue");
-            parameterData['parameterMaxValue'] = $(this)[0].getAttribute("parameterMaxValue");
-            parameterData['parameterValue'] = $(this).val();
-            calculatedParameterValue = calculateParameterData(parameterData);
-            parameterData['calculatedParameterValue'] = calculatedParameterValue;
-            parameterDataList.push(parameterData);
-            parameterData = [];
-
-        });*/
         paramatersData = parametersSerie;
-
 
 
         require.config({
@@ -79,18 +56,12 @@ $(document).ready(function() {
             function (ec) {
                 // Initialize after dom ready
                 var myChart = ec.init(document.getElementById('main'));
-
-                //var options = setEchartOption(paramatersData);
                 var options = setEchartOption2(allParametersSerie);
-                // Load data into the ECharts instance
                 myChart.setOption(options);
 
                 /*permet de mettre a jour une série de valeur
                 var updatedSeries = myChart.getSeries();
-                updatedSeries[0]['name'] = "je change";
                 updatedSeries[0].data[0].value[0] = 100;
-                updatedSeries[0].data[0].value[1] = 100;
-                updatedSeries[0].data[0].value[2] = 100;
                 myChart.setSeries(updatedSeries);*/
             }
         );
@@ -129,107 +100,39 @@ function calculateParameterData(parameterData){
 }
 
 /*
-* genere le JSON option necessaire pour l'affichage d'un graphique radar
-* input: tableau d'elements contenant [titre,maxvalue,value]
-* */
-function setEchartOption(paramatersData){
-
-    var titleString = "pipou";
-    var polarString="[";
-    var dataString='[{"value": [';
-    for	(var index = 0; index < paramatersData.length; index++) {
-        if (index == paramatersData.length-1 ){
-            polarString += '{"text": "'+paramatersData[index]["parameterName"]+'", "max": 100}]';
-            dataString += paramatersData[index]["calculatedParameterValue"]+'],"name":"serie1"}]';
-
-        }else {
-            polarString += '{"text": "'+paramatersData[index]["parameterName"]+'", "max": 100},';
-            dataString += paramatersData[index]["calculatedParameterValue"]+',';
-        }
-    }
-    var JSONPolar = JSON.parse(polarString);
-    var JSONSeries = JSON.parse(dataString);
-
-    option = {
-        title: {
-            text: titleString,
-            subtext: ''
-        },
-        tooltip: {
-            trigger: 'axis'
-        },
-        legend: {
-            orient: 'vertical',
-            x: 'right',
-            y: 'bottom',
-            data: ['（Allocated Budget）']
-        },
-        toolbox: {
-            show: true,
-            feature: {
-                mark: {show: true},
-                dataView: {show: true, readOnly: false},
-                restore: {show: true},
-                saveAsImage: {show: true}
-            }
-        },
-        polar: [
-            {
-                scale: true,
-                indicator: JSONPolar
-            }
-        ],
-        //calculable: true,
-        series: [
-            {
-                name: '（Budget vs spending）',
-                type: 'radar',
-                data: JSONSeries
-            }
-        ]
-    };
-
-    return option;
-}
-
-/*
 * fonction permettant de definir les options pour un graphique de type radar
 * */
 function setEchartOption2(seriesList){
-
+    console.log(seriesList);
+    var serieName = "";
     var polarString="[";
-    //var seriesString="[{";
-    //var dataString='[{"value": [';
     var dataString='[';
+    var dataLegend='[';
 
     for (var i = 0; i<seriesList.length; i++){
-        
-        console.log(seriesList[i]);
-
-
+        serieName = seriesList[i]['serieName'];
+        if ( i == seriesList.length-1 ){
+            dataLegend += '"'+serieName+'"';
+        }else{
+            dataLegend += '"'+serieName+'",';
+        }
         dataString += '{"value": [';
-        
         var singleSerie = seriesList[i];
         for ( var j = 0; j<singleSerie.length; j++){
-            /*console.log(singleSerie[j]);
-            console.log(singleSerie[j]["parameterName"]);
-            console.log(singleSerie[j]["parameterValue"]);*/
-
             if ( i == 0 ){
                 if (j == singleSerie.length-1 ){
                     polarString += '{"text": "'+singleSerie[j]["parameterName"]+'", "max": 100}';
-
                 }else {
                     polarString += '{"text": "'+singleSerie[j]["parameterName"]+'", "max": 100},';
                 }
             }
-
             if (j == singleSerie.length-1 ){
+
                 if (j == singleSerie.length-1 && i == seriesList.length-1 ){
                     polarString += "]";
-                    dataString += singleSerie[j]["calculatedParameterValue"]+'],"name":"serie'+i+'"}';
+                    dataString += singleSerie[j]["calculatedParameterValue"]+'],"name":"'+serieName+'"}';
                 }else{
-                    dataString += singleSerie[j]["calculatedParameterValue"]+'],"name":"serie'+i+'"},';
+                    dataString += singleSerie[j]["calculatedParameterValue"]+'],"name":"'+serieName+'"},';
                 }
             }else {
                 dataString += singleSerie[j]["calculatedParameterValue"]+',';
@@ -238,11 +141,14 @@ function setEchartOption2(seriesList){
     }
 
     dataString += "]";
-    console.log(polarString);
-    console.log(dataString);
+    dataLegend += "]";
+    console.log(dataLegend);
+    /*console.log(polarString);
+    console.log(dataString);*/
 
     var JSONPolar = JSON.parse(polarString);
     var JSONSeries = JSON.parse(dataString);
+    var JSONLegend = JSON.parse(dataLegend);
 
     option = {
         title: {
@@ -256,7 +162,7 @@ function setEchartOption2(seriesList){
             orient: 'vertical',
             x: 'right',
             y: 'bottom',
-            data: ['a changer']
+            data: JSONLegend
         },
         toolbox: {
             show: true,
@@ -276,7 +182,7 @@ function setEchartOption2(seriesList){
         //calculable: true,
         series: [
             {
-                name: '（Budget vs spending）',
+                name: 'a changer',
                 type: 'radar',
                 data: JSONSeries
             }
@@ -284,25 +190,6 @@ function setEchartOption2(seriesList){
     };
 
     return option;
-
-
-
-    /*series: [
-        {
-            name: '（Budget vs spending）',
-            type: 'radar',
-            data: [
-                {
-                    value: [4300, 10000, 28000, 35000, 50000, 19000],
-                    name: '（Allocated Budget）'
-                },
-                {
-                    value: [5000, 14000, 28000, 31000, 42000, 21000],
-                    name: '（Actual Spending）'
-                }
-            ]
-        }
-    ]*/
 
 }
 

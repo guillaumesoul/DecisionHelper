@@ -7,6 +7,7 @@
             <!--datatable to put here-->
             <table cellpadding="0" cellspacing="0" border="0" class="display" id="parameterTable">
                 <thead >
+                    <th>Name</th>
                     <?php
                     $i = 0;
                     foreach ($this->parameters as $parameter) {
@@ -22,6 +23,7 @@
                 </thead>
                 <tbody>
                 <tr class="parametersSerie">
+                    <td><input type="text" class="form-control serieName"></td>
                     <?php
                     $i = 0;
                     foreach ($this->parameters as $parameter) {
