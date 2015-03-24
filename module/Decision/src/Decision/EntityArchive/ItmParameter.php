@@ -57,13 +57,6 @@ class ItmParameter
     private $parameterType;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="parameter_order", type="integer", nullable=true)
-     */
-    private $parameterOrder;
-
-    /**
      * @var \Decision\Entity\ItmDecision
      *
      * @ORM\ManyToOne(targetEntity="Decision\Entity\ItmDecision")
@@ -73,8 +66,12 @@ class ItmParameter
      */
     private $parameterDecision;
 
+
+
     /**
-     * @return int
+     * Get parameterId
+     *
+     * @return integer 
      */
     public function getParameterId()
     {
@@ -82,15 +79,22 @@ class ItmParameter
     }
 
     /**
-     * @param int $parameterId
+     * Set parameterName
+     *
+     * @param string $parameterName
+     * @return ItmParameter
      */
-    public function setParameterId($parameterId)
+    public function setParameterName($parameterName)
     {
-        $this->parameterId = $parameterId;
+        $this->parameterName = $parameterName;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * Get parameterName
+     *
+     * @return string 
      */
     public function getParameterName()
     {
@@ -98,15 +102,22 @@ class ItmParameter
     }
 
     /**
-     * @param string $parameterName
+     * Set parameterMinValue
+     *
+     * @param string $parameterMinValue
+     * @return ItmParameter
      */
-    public function setParameterName($parameterName)
+    public function setParameterMinValue($parameterMinValue)
     {
-        $this->parameterName = $parameterName;
+        $this->parameterMinValue = $parameterMinValue;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * Get parameterMinValue
+     *
+     * @return string 
      */
     public function getParameterMinValue()
     {
@@ -114,15 +125,22 @@ class ItmParameter
     }
 
     /**
-     * @param string $parameterMinValue
+     * Set parameterMaxValue
+     *
+     * @param string $parameterMaxValue
+     * @return ItmParameter
      */
-    public function setParameterMinValue($parameterMinValue)
+    public function setParameterMaxValue($parameterMaxValue)
     {
-        $this->parameterMinValue = $parameterMinValue;
+        $this->parameterMaxValue = $parameterMaxValue;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * Get parameterMaxValue
+     *
+     * @return string 
      */
     public function getParameterMaxValue()
     {
@@ -130,15 +148,22 @@ class ItmParameter
     }
 
     /**
-     * @param string $parameterMaxValue
+     * Set parameterUnit
+     *
+     * @param string $parameterUnit
+     * @return ItmParameter
      */
-    public function setParameterMaxValue($parameterMaxValue)
+    public function setParameterUnit($parameterUnit)
     {
-        $this->parameterMaxValue = $parameterMaxValue;
+        $this->parameterUnit = $parameterUnit;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * Get parameterUnit
+     *
+     * @return string 
      */
     public function getParameterUnit()
     {
@@ -146,15 +171,22 @@ class ItmParameter
     }
 
     /**
-     * @param string $parameterUnit
+     * Set parameterType
+     *
+     * @param string $parameterType
+     * @return ItmParameter
      */
-    public function setParameterUnit($parameterUnit)
+    public function setParameterType($parameterType)
     {
-        $this->parameterUnit = $parameterUnit;
+        $this->parameterType = $parameterType;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * Get parameterType
+     *
+     * @return string 
      */
     public function getParameterType()
     {
@@ -162,45 +194,25 @@ class ItmParameter
     }
 
     /**
-     * @param string $parameterType
+     * Set parameterDecision
+     *
+     * @param \Decision\Entity\ItmDecision $parameterDecision
+     * @return ItmParameter
      */
-    public function setParameterType($parameterType)
+    public function setParameterDecision(\Decision\Entity\ItmDecision $parameterDecision = null)
     {
-        $this->parameterType = $parameterType;
+        $this->parameterDecision = $parameterDecision;
+
+        return $this;
     }
 
     /**
-     * @return int
-     */
-    public function getParameterOrder()
-    {
-        return $this->parameterOrder;
-    }
-
-    /**
-     * @param int $parameterOrder
-     */
-    public function setParameterOrder($parameterOrder)
-    {
-        $this->parameterOrder = $parameterOrder;
-    }
-
-    /**
-     * @return \Decision\Entity\ItmDecision
+     * Get parameterDecision
+     *
+     * @return \Decision\Entity\ItmDecision 
      */
     public function getParameterDecision()
     {
         return $this->parameterDecision;
     }
-
-    /**
-     * @param \Decision\Entity\ItmDecision $parameterDecision
-     */
-    public function setParameterDecision($parameterDecision)
-    {
-        $this->parameterDecision = $parameterDecision;
-    }
-
-
-
 }

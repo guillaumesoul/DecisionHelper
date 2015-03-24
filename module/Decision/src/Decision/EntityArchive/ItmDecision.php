@@ -42,8 +42,12 @@ class ItmDecision
      */
     private $decisionAuthorId;
 
+
+
     /**
-     * @return int
+     * Get decisionId
+     *
+     * @return integer 
      */
     public function getDecisionId()
     {
@@ -51,15 +55,22 @@ class ItmDecision
     }
 
     /**
-     * @param int $decisionId
+     * Set decisionName
+     *
+     * @param string $decisionName
+     * @return ItmDecision
      */
-    public function setDecisionId($decisionId)
+    public function setDecisionName($decisionName)
     {
-        $this->decisionId = $decisionId;
+        $this->decisionName = $decisionName;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * Get decisionName
+     *
+     * @return string 
      */
     public function getDecisionName()
     {
@@ -67,15 +78,22 @@ class ItmDecision
     }
 
     /**
-     * @param string $decisionName
+     * Set decisionCreattionDate
+     *
+     * @param string $decisionCreattionDate
+     * @return ItmDecision
      */
-    public function setDecisionName($decisionName)
+    public function setDecisionCreattionDate($decisionCreattionDate)
     {
-        $this->decisionName = $decisionName;
+        $this->decisionCreattionDate = $decisionCreattionDate;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * Get decisionCreattionDate
+     *
+     * @return string 
      */
     public function getDecisionCreattionDate()
     {
@@ -83,28 +101,25 @@ class ItmDecision
     }
 
     /**
-     * @param string $decisionCreattionDate
+     * Set decisionAuthorId
+     *
+     * @param string $decisionAuthorId
+     * @return ItmDecision
      */
-    public function setDecisionCreattionDate($decisionCreattionDate)
+    public function setDecisionAuthorId($decisionAuthorId)
     {
-        $this->decisionCreattionDate = $decisionCreattionDate;
+        $this->decisionAuthorId = $decisionAuthorId;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * Get decisionAuthorId
+     *
+     * @return string 
      */
     public function getDecisionAuthorId()
     {
         return $this->decisionAuthorId;
     }
-
-    /**
-     * @param string $decisionAuthorId
-     */
-    public function setDecisionAuthorId($decisionAuthorId)
-    {
-        $this->decisionAuthorId = $decisionAuthorId;
-    }
-
-
 }

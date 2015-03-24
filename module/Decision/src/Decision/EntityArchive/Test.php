@@ -28,8 +28,12 @@ class Test
      */
     private $nom;
 
+
+
     /**
-     * @return int
+     * Get idtest
+     *
+     * @return integer 
      */
     public function getIdtest()
     {
@@ -37,28 +41,25 @@ class Test
     }
 
     /**
-     * @param int $idtest
+     * Set nom
+     *
+     * @param string $nom
+     * @return Test
      */
-    public function setIdtest($idtest)
+    public function setNom($nom)
     {
-        $this->idtest = $idtest;
+        $this->nom = $nom;
+
+        return $this;
     }
 
     /**
-     * @return string
+     * Get nom
+     *
+     * @return string 
      */
     public function getNom()
     {
         return $this->nom;
     }
-
-    /**
-     * @param string $nom
-     */
-    public function setNom($nom)
-    {
-        $this->nom = $nom;
-    }
-
-
 }
