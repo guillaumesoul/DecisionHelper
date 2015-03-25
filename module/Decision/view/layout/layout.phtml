@@ -38,19 +38,17 @@
 
         <ul class="nav navbar-top-links navbar-right">
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-envelope fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                </a>
-
-                <!-- /.dropdown-messages -->
+                <a href="<?php echo $this->url('home', array('action'=>'index'));?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>
             <!-- /.dropdown -->
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                </a>
-
-                <!-- /.dropdown-tasks -->
+                <a href="<?php echo $this->url('create', array('action'=>'create'));?>"><i class="fa fa-edit fa-fw"></i> Create decision</a>
+            </li>
+            <li class="dropdown">
+                <a href="<?php echo $this->url('table', array('action'=>'table'));?>"></i> Tables</a>
+            </li>
+            <li class="dropdown">
+                <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages</a>
             </li>
             <!-- /.dropdown -->
             <li class="dropdown">
@@ -80,34 +78,7 @@
         </ul>
         <!-- /.navbar-top-links -->
 
-        <div class="navbar-default navbar-static-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav" id="side-menu">
-                    <li class="sidebar-search">
-                        <!-- /input-group -->
-                    </li>
-                    <li>
-                        <a href="<?php echo $this->url('home', array('action'=>'index'));?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-                    </li>
-                    <li>
-                        <!--<a href="/create"><i class="fa fa-edit fa-fw"></i> Create decision</a>-->
-                        <a href="<?php echo $this->url('create', array('action'=>'create'));?>"><i class="fa fa-edit fa-fw"></i> Create decision</a>
-                    </li>
-                    <li>
-                        <a href="<?php echo $this->url('table', array('action'=>'table'));?>"></i> Tables</a>
-                    </li>
-                    <li>
-                        <a href="<?php echo $this->url('charts', array('action'=>'index'));?>"><i class="fa fa-bar-chart-o fa-fw"></i> Charts</a>
-                        <!-- /.nav-second-level -->
-                    </li>
-                    <li>
-                        <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages</a>
-                    </li>
-                </ul>
-                <!-- /#side-menu -->
-            </div>
-            <!-- /.sidebar-collapse -->
-        </div>
+
 
         <!-- /.navbar-static-side -->
     </nav>

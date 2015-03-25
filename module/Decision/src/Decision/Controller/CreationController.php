@@ -29,6 +29,11 @@ class CreationController extends AbstractActionController
         return new ViewModel();
     }
 
+    public function create2Action()
+    {
+        return new ViewModel();
+    }
+
     public function getParameterDataAction(){
 
         $request = $this->getRequest();

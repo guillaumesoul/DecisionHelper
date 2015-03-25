@@ -148,9 +148,6 @@ function setEchartOption2(seriesList){
 
     dataString += "]";
     dataLegend += "]";
-    console.log(dataLegend);
-    /*console.log(polarString);
-    console.log(dataString);*/
 
     var JSONPolar = JSON.parse(polarString);
     var JSONSeries = JSON.parse(dataString);
@@ -185,7 +182,6 @@ function setEchartOption2(seriesList){
                 indicator: JSONPolar
             }
         ],
-        //calculable: true,
         series: [
             {
                 name: 'a changer',

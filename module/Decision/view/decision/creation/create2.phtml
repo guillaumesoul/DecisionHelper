@@ -1,0 +1,70 @@
+<div xmlns="http://www.w3.org/1999/html">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3 class="panel-title">NEW DESIGN !!!</h3>
+        </div>
+        <div class="panel-body">
+            <!--<form class="row" id="decisionForm" data-parsley-validate>
+                <div class="form-group col-xs-4">
+                    <label class="control-label">NOM</label>
+                    <input type="text" class="form-control col-xs-3 decisionName" placeholder="NOM" required/>
+                </div>
+                <input type="submit" class="btn btn-default" id="getAllParametersData" value="Create your decision">
+
+            </form>-->
+
+            <div>
+                <form class="form-horizontal" id="parameterForm">
+                    <div class="form-group">
+                        <label for="parameterName" class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control parameterName" placeholder="NAME" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="parameterMinValue" class="col-sm-2 control-label">Min Value</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control parameterMinValue " placeholder="MIN VALUE" data-parsley-type="number" required/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="parameterMaxValue" class="col-sm-2 control-label">Max Value</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control parameterMaxValue" placeholder="MAX VALUE" default-value="10" data-parsley-type="number" required/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="parameterOrder" class="col-sm-2 control-label">Order</label>
+                        <div class="col-sm-3">
+                            <select type="text" class="form-control parameterOrder" required >
+                                <option value=0>normal</option>
+                                <option value=1>inverse</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="parameterUnit" class="col-sm-2 control-label">Unit</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control parameterUnit" placeholder="UNITS"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <!--<button type="submit" class="btn btn-default">Sign in</button>-->
+                            <input type="submit" class="btn btn-default" id="addParameter" name="addParameter"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <hr>
+
+
+            <div>
+                <div id="parametersList">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

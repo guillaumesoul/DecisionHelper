@@ -40,6 +40,16 @@ return array(
                     ),
                 ),
             ),
+            'create2' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/create2',
+                    'defaults' => array(
+                        'controller' => 'Decision\Controller\Creation',
+                        'action'     => 'create2',
+                    ),
+                ),
+            ),
             'getParameterData' => array(
                 'type' => 'Zend\Mvc\Router\Http\Literal',
                 'options' => array(

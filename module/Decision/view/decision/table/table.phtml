@@ -1,71 +1,70 @@
-<div id="page-wrapper">
-    <div class="panel panel-info">
-        <div class="panel-heading">
-            <h3 class="panel-title">Let's fill our parameter table</h3>
-        </div>
-        <div class="panel-body">
-            <!--datatable to put here-->
-            <table cellpadding="0" cellspacing="0" border="0" class="display" id="parameterTable">
-                <thead >
-                    <th>Name</th>
-                    <?php
-                    $i = 0;
-                    foreach ($this->parameters as $parameter) {
-                        echo
-                            '<th>'.
-                                '<div class="">'.$parameter->getParameterName().'</div>'.
-                                '<div>min : '.$parameter->getParameterMinValue().'</div>'.
-                                '<div>max : '.$parameter->getParameterMaxValue().'</div>'.
-                            '</th>';
-                        $i++;
-                    }
-                    ?>
-                </thead>
-                <tbody>
-                <tr class="parametersSerie">
-                    <td><input type="text" class="form-control serieName"></td>
-                    <?php
-                    $i = 0;
-                    foreach ($this->parameters as $parameter) {
-                        echo
-                            '<td>
-                                <input type="number" class="form-control parameterValue"
-                                parameterId="'.$parameter->getParameterId().'"
-                                parameterName="'.$parameter->getParameterName().'"
-                                parameterMinValue="'.$parameter->getParameterMinValue().'"
-                                parameterMaxValue="'.$parameter->getParameterMaxValue().'"
-                                parameterOrder="'.$parameter->getParameterOrder().'" />
-                            </td>';
-                        $i++;
-                    }
-                    ?>
-                </tr>
-                </tbody>
-            </table>
-            <div class="btn-toolbar">
-                <!--<button class="btn btn-default saveParametersInput">PROCESS VALUES</button>-->
-                <button class="btn btn-default addRow">ADD A ROW</button>
-            </div>
-            <hr>
-            <div>
-                <button class="btn btn-default" id="chartGeneration">RADAR IT!</button>
-            </div>
-        </div>
-        <div>
 
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Let's fill our parameter table</h3>
+    </div>
+    <div class="panel-body">
+        <!--datatable to put here-->
+        <table cellpadding="0" cellspacing="0" border="0" class="display" id="parameterTable">
+            <thead >
+                <th>Name</th>
+                <?php
+                $i = 0;
+                foreach ($this->parameters as $parameter) {
+                    echo
+                        '<th>'.
+                            '<div class="">'.$parameter->getParameterName().'</div>'.
+                            '<div>min : '.$parameter->getParameterMinValue().'</div>'.
+                            '<div>max : '.$parameter->getParameterMaxValue().'</div>'.
+                        '</th>';
+                    $i++;
+                }
+                ?>
+            </thead>
+            <tbody>
+            <tr class="parametersSerie">
+                <td><input type="text" class="form-control serieName"></td>
+                <?php
+                $i = 0;
+                foreach ($this->parameters as $parameter) {
+                    echo
+                        '<td>
+                            <input type="number" class="form-control parameterValue"
+                            parameterId="'.$parameter->getParameterId().'"
+                            parameterName="'.$parameter->getParameterName().'"
+                            parameterMinValue="'.$parameter->getParameterMinValue().'"
+                            parameterMaxValue="'.$parameter->getParameterMaxValue().'"
+                            parameterOrder="'.$parameter->getParameterOrder().'" />
+                        </td>';
+                    $i++;
+                }
+                ?>
+            </tr>
+            </tbody>
+        </table>
+        <div class="btn-toolbar">
+            <!--<button class="btn btn-default saveParametersInput">PROCESS VALUES</button>-->
+            <button class="btn btn-default addRow">ADD A ROW</button>
+        </div>
+        <hr>
+        <div>
+            <button class="btn btn-default" id="chartGeneration">RADAR IT!</button>
         </div>
     </div>
-    <div class="panel panel-info">
-        <div class="panel-heading">
-            <h3 class="panel-title">Your radar</h3>
-        </div>
-        <div class="panel-body">
-            <div id="main" style="height:400px;"></div>
+    <div>
 
-        </div>
-        <div>
+    </div>
+</div>
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Your radar</h3>
+    </div>
+    <div class="panel-body">
+        <div id="main" style="height:400px;"></div>
 
-        </div>
+    </div>
+    <div>
+
     </div>
 </div>
 
