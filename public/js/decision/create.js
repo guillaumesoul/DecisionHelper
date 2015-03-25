@@ -7,6 +7,7 @@ $(document).ready(function(){
             var parameterName = $('.parameterName').val();
             var parameterMinValue = $('.parameterMinValue').val();
             var parameterMaxValue = $('.parameterMaxValue').val();
+            var parameterOrder = $('.parameterOrder').val();
             var parameterUnit = $('.parameterUnit').val();
 
             $.ajax({
@@ -16,6 +17,7 @@ $(document).ready(function(){
                     parameterName: parameterName,
                     parameterMinValue: parameterMinValue,
                     parameterMaxValue: parameterMaxValue,
+                    parameterOrder: parameterOrder,
                     parameterUnit: parameterUnit
                 },
                 success : function(data,xhr) {
@@ -32,6 +34,7 @@ $(document).ready(function(){
         e.preventDefault();
         if ( $(this).parsley().isValid() && $('.parameterData').length > 0 ) {
             var parametersData = gelAllParametersData();
+            console.log(parametersData);
             var decisionName = $(".decisionName ").val();
             $.ajax({
                 type : "POST",
@@ -49,17 +52,6 @@ $(document).ready(function(){
             });
         }
     });
-
-    /*$("#testButton").click(function(){
-        console.log("c'est parti");
-        $.ajax({
-            type : "POST",
-            url : './persistance',
-            success : function(data,xhr) {
-                console.log("persistance ok");
-            }
-        });
-    });*/
 });
 
 function setDisplayParameterData(parameterData){
@@ -67,6 +59,7 @@ function setDisplayParameterData(parameterData){
     htmlCode += ("<label>NAME : </label><span class='paramName'>"+parameterData["parameterName"]+"</span><br>");
     htmlCode += ("<label>MIN VALUE : </label><span class='paramMinValue'>"+parameterData["parameterMinValue"]+"</span><br>");
     htmlCode += ("<label>MAX VALUE : </label><span class='paramMaxValue'>"+parameterData["parameterMaxValue"]+"</span><br>");
+    htmlCode += ("<label>ORDER : </label><span class='paramOrder'>"+parameterData["parameterOrder"]+"</span><br>");
     htmlCode += ("<label>UNIT : </label><span class='paramUnit'>"+parameterData["parameterUnit"]+"</span><br>");
     htmlCode += ('</div>');
     return htmlCode;

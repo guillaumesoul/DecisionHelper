@@ -36,6 +36,7 @@ class CreationController extends AbstractActionController
             "parameterName" => $request->getPost('parameterName'),
             "parameterMinValue" => $request->getPost('parameterMinValue'),
             "parameterMaxValue" => $request->getPost('parameterMaxValue'),
+            "parameterOrder" => $request->getPost('parameterOrder'),
             "parameterUnit" => $request->getPost('parameterUnit')
         );
         $response = new Response();
@@ -66,7 +67,8 @@ class CreationController extends AbstractActionController
             $parameter->setParameterName($parameterData[0]);
             $parameter->setParameterMinValue($parameterData[1]);
             $parameter->setParameterMaxValue($parameterData[2]);
-            $parameter->setParameterUnit($parameterData[3]);
+            $parameter->setParameterOrder($parameterData[3]);
+            $parameter->setParameterUnit($parameterData[4]);
             $parameter->setParameterDecision($decision);
             $em->persist($parameter);
         }

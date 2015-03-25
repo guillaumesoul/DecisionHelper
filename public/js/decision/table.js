@@ -27,12 +27,11 @@ $(document).ready(function() {
                 parameterData['parameterName'] = singleSerie[i].getAttribute("parameterName");
                 parameterData['parameterMinValue'] = singleSerie[i].getAttribute("parameterMinValue");
                 parameterData['parameterMaxValue'] = singleSerie[i].getAttribute("parameterMaxValue");
+                parameterData['parameterOrder'] = singleSerie[i].getAttribute("parameterOrder");
                 parameterData['parameterValue'] = singleSerie[i].value;
                 calculatedParameterValue = calculateParameterData(parameterData);
                 parameterData['calculatedParameterValue'] = calculatedParameterValue;
                 parametersSerie.push(parameterData);
-
-                //parametersSerie["parametersData"] = parameterData;
                 parameterData = [];
             }
             allParametersSerie.push(parametersSerie);
@@ -83,7 +82,9 @@ function calculateParameterData(parameterData){
     var parameterMinValue = parameterData['parameterMinValue'];
     var parameterMaxValue = parameterData['parameterMaxValue'];
     var parameterValue = parameterData['parameterValue'];
+    var parameterOrder = parameterData['parameterOrder'];
     var calculatedParameterValue;
+    var output;
     if (parameterMaxValue-parameterMinValue > 0 ){
         if (parameterValue-parameterMinValue > 0){
             calculatedParameterValue = (parameterValue-parameterMinValue)/(parameterMaxValue-parameterMinValue);
@@ -96,7 +97,12 @@ function calculateParameterData(parameterData){
     if (calculatedParameterValue > 1){
         calculatedParameterValue = 1;
     }
-    return calculatedParameterValue*100;
+    if (parameterOrder == "1"){
+        output = 1 - calculatedParameterValue;
+    }else{
+        output = calculatedParameterValue;
+    }
+    return output*100;
 }
 
 /*
