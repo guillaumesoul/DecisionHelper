@@ -1,5 +1,19 @@
 $(document).ready(function(){
 
+    /*var parameterTable = $("#parameterTable").dataTable();
+    var parameterTable = $("#parameterTable").dataTable({
+        "searching": false,
+        "paging": false,
+        "ordering": false,
+        "bInfo" : false
+    });
+
+    var colonnes = parameterTable.columns();
+    console.log("soucie?");
+    console.log(colonnes);
+    var object = parameterTable.toJQuery();
+    console.log(object)*/;
+
     $('#parameterForm').submit(function(e) {
         e.preventDefault();
         if ( $(this).parsley().isValid() ) {
@@ -24,6 +38,16 @@ $(document).ready(function(){
                     var parsedData = JSON.parse(data);
                     var myhtml = setDisplayParameterData(parsedData);
                     $('#parametersList').append(myhtml);
+                    $("#tableHead").append("<th>colonne name</th>");
+                    $("#tableHead").append("<th>colonne name</th>");
+                    $("#tableBody").append("<tr><td>valeur</td><td>valeur</td></tr>");
+                    $("#tableBody").append("<tr><td>valeur</td><td>valeur</td></tr>");
+                    var parameterTable = $("#parameterTable table").dataTable({
+                        "bJQueryUI": true,
+                        "sPaginationType": "full_numbers"
+                    });
+                    parameterTable.fnDraw();
+                    //console.log(parameterTable);
                 }
             });
         }
@@ -55,12 +79,25 @@ $(document).ready(function(){
 });
 
 function setDisplayParameterData(parameterData){
-    var htmlCode = '<div class="parameterData col-xs-3">';
-    htmlCode += ("<label>NAME : </label><span class='paramName'>"+parameterData["parameterName"]+"</span><br>");
-    htmlCode += ("<label>MIN VALUE : </label><span class='paramMinValue'>"+parameterData["parameterMinValue"]+"</span><br>");
-    htmlCode += ("<label>MAX VALUE : </label><span class='paramMaxValue'>"+parameterData["parameterMaxValue"]+"</span><br>");
-    htmlCode += ("<label>ORDER : </label><span class='paramOrder'>"+parameterData["parameterOrder"]+"</span><br>");
-    htmlCode += ("<label>UNIT : </label><span class='paramUnit'>"+parameterData["parameterUnit"]+"</span><br>");
+    /*var htmlCode = '<div class="parameterData col-xs-2">';
+    htmlCode += ('<div class="thumbnail"><div class="caption">');
+    htmlCode += ("<span class='paramName' contenteditable='true'>"+parameterData["parameterName"]+"</span><br>");
+    htmlCode += ("<span class='paramMinValue' contenteditable='true'>"+parameterData["parameterMinValue"]+"</span><br>");
+    htmlCode += ("<span class='paramMaxValue'>"+parameterData["parameterMaxValue"]+"</span><br>");
+    htmlCode += ("<span class='paramOrder'>"+parameterData["parameterOrder"]+"</span><br>");
+    htmlCode += ("<span class='paramUnit'>"+parameterData["parameterUnit"]+"</span><br>");
+    htmlCode += ('</div></div>');
+    htmlCode += ('</div>');
+    return htmlCode;*/
+
+    var htmlCode = '<div class="parameterData col-xs-2">';
+    htmlCode += ('<div class="thumbnail"><div class="caption">');
+    htmlCode += ("<div class='paramName alert alert-info thumbnailParameterData' contenteditable='true' style='margin-bottom: 5px; padding: 5px; text-align: center;'><b>"+parameterData["parameterName"]+"</b></div>");
+    htmlCode += ("<div class='paramMinValue alert alert-info' contenteditable='true' style='margin-bottom: 5px; padding: 5px; text-align: center;'>"+parameterData["parameterMinValue"]+"</div>");
+    htmlCode += ("<div class='paramMaxValue alert alert-info' contenteditable='true' style='margin-bottom: 5px; padding: 5px; text-align: center;'>"+parameterData["parameterMaxValue"]+"</div>");
+    htmlCode += ("<div class='paramOrder alert alert-info' contenteditable='true' style='margin-bottom: 5px; padding: 5px; text-align: center;'>"+parameterData["parameterOrder"]+"</div>");
+    htmlCode += ("<div class='paramUnit alert alert-info' contenteditable='true' style='margin-bottom: 5px; padding: 5px; text-align: center;'>"+parameterData["parameterUnit"]+"</div>");
+    htmlCode += ('</div></div>');
     htmlCode += ('</div>');
     return htmlCode;
 }
