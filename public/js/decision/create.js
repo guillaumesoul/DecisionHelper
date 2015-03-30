@@ -1,18 +1,6 @@
 $(document).ready(function(){
 
-    /*var parameterTable = $("#parameterTable").dataTable();
-    var parameterTable = $("#parameterTable").dataTable({
-        "searching": false,
-        "paging": false,
-        "ordering": false,
-        "bInfo" : false
-    });
-
-    var colonnes = parameterTable.columns();
-    console.log("soucie?");
-    console.log(colonnes);
-    var object = parameterTable.toJQuery();
-    console.log(object)*/;
+    parameterNumber = 0;
 
     $('#parameterForm').submit(function(e) {
         e.preventDefault();
@@ -23,8 +11,43 @@ $(document).ready(function(){
             var parameterMaxValue = $('.parameterMaxValue').val();
             var parameterOrder = $('.parameterOrder').val();
             var parameterUnit = $('.parameterUnit').val();
+            parameterData["parameterName"] = parameterName;
+            parameterData["parameterMinValue"] = parameterMinValue;
+            parameterData["parameterMaxValue"] = parameterMaxValue;
+            parameterData["parameterOrder"] = parameterOrder;
+            parameterData["parameterUnit"] = parameterUnit;
 
-            $.ajax({
+            var myhtml = setDisplayParameterData(parameterData);
+            $('#parametersList').append(myhtml);
+            var tableHead = "<div class='paramName alert alert-info thumbnailParameterData' contenteditable='true' style='margin-bottom: 5px; padding: 5px; text-align: center;'><b>"+parameterData["parameterName"]+"</b></div>";
+            tableHead += ("<div class='paramMinValue alert alert-info thumbnailParameterData' contenteditable='true' style='margin-bottom: 5px; padding: 5px; text-align: center;'>"+parameterData["parameterMinValue"]+"</div>");
+            tableHead += ("<div class='paramMaxValue alert alert-info thumbnailParameterData' contenteditable='true' style='margin-bottom: 5px; padding: 5px; text-align: center;'>"+parameterData["parameterMaxValue"]+"</div>");
+            tableHead += ("<div class='paramOrder alert alert-info thumbnailParameterData' contenteditable='true' style='margin-bottom: 5px; padding: 5px; text-align: center;'>"+parameterData["parameterOrder"]+"</div>");
+            tableHead += ("<div class='paramUnit alert alert-info thumbnailParameterData' contenteditable='true' style='margin-bottom: 5px; padding: 5px; text-align: center;'>"+parameterData["parameterUnit"]+"</div>");
+            tableHead += ("<div class='paramUnit alert alert-info deleteColumn' style='margin-bottom: 5px; padding: 5px; text-align: center;'><button type='button' class='btn btn-default' onclick='deleteColumn()'>delete</button></div>");
+
+            $("#tableHead").append("<th>"+tableHead+"</th>");
+            //$("#tableHead").append("<th>"+parameterData.parameterName+"</th>");
+            //$("#tableBody").append('<tr><td><input type="number" class="form-control parameterValue" parameterName="'+parameterData["parameterName"]+'" parameterMinValue="'+parameterData["parameterMinValue"]+'" parameterMaxValue="'+parameterData["parameterMaxValue"]+'" parameterOrder="'+parameterData["parameterOrder"]+'"></td></tr>');
+            //$("#tableBody").append('<tr><td><input type="number" class="form-control parameterValue"></td></tr>');
+            parameterNumber++;
+            console.log(parameterNumber);
+            var tableBody = "<tr>";
+            for (i=1 ; i<=parameterNumber ; i++){
+                var tableBody = '<td><input type="number" class="form-control parameterValue"></td>';
+                console.log('coucou');
+            }
+            tableBody += "</tr>";
+            $("#tableBody").append(tableBody);
+            var parameterTable = $("#parameterTable table").dataTable({
+                "bJQueryUI": true,
+                "sPaginationType": "full_numbers"
+            });
+            parameterTable.fnDraw();
+            console.log(parameterTable);
+
+
+            /*$.ajax({
                 type : "POST",
                 url : './getParameterData',
                 data: {
@@ -36,20 +59,40 @@ $(document).ready(function(){
                 },
                 success : function(data,xhr) {
                     var parsedData = JSON.parse(data);
+                    console.log(data);
+                    console.log(parsedData.parameterName);
                     var myhtml = setDisplayParameterData(parsedData);
                     $('#parametersList').append(myhtml);
-                    $("#tableHead").append("<th>colonne name</th>");
-                    $("#tableHead").append("<th>colonne name</th>");
-                    $("#tableBody").append("<tr><td>valeur</td><td>valeur</td></tr>");
-                    $("#tableBody").append("<tr><td>valeur</td><td>valeur</td></tr>");
+                    $("#tableHead").append("<th>"+parsedData.parameterName+"</th>");
+                    $("#tableBody").append('<tr><td><input type="number" class="form-control parameterValue" parameterMinValue="'+parsedData.parameterMinValue+'" parameterMaxValue="'+parsedData.parameterMaxValue+'" parameterOrder="'+parsedData.parameterOrder+'"></td></tr>');
                     var parameterTable = $("#parameterTable table").dataTable({
                         "bJQueryUI": true,
                         "sPaginationType": "full_numbers"
                     });
                     parameterTable.fnDraw();
-                    //console.log(parameterTable);
+                    console.log(parameterTable);
+
+                    var counter = 1;
+
+                    $('#addRow').on( 'click', function () {
+                        console.log(parameterTable);
+                        parameterTable.row.add( [
+                            'coucou',
+                            'coucou',
+                            'coucou'
+                        ] ).draw();
+                        parameterTable._fnAddTr( $('<tr>'+
+                            '<td>coucou</td>'+
+                            '<td>coucou</td>'+
+                            '</tr>')[0]
+                        );
+
+                        counter++;
+                    } );
+
+                    console.log(parameterTable);
                 }
-            });
+            });*/
         }
         $(this)[0].reset();
     });
@@ -79,29 +122,20 @@ $(document).ready(function(){
 });
 
 function setDisplayParameterData(parameterData){
-    /*var htmlCode = '<div class="parameterData col-xs-2">';
-    htmlCode += ('<div class="thumbnail"><div class="caption">');
-    htmlCode += ("<span class='paramName' contenteditable='true'>"+parameterData["parameterName"]+"</span><br>");
-    htmlCode += ("<span class='paramMinValue' contenteditable='true'>"+parameterData["parameterMinValue"]+"</span><br>");
-    htmlCode += ("<span class='paramMaxValue'>"+parameterData["parameterMaxValue"]+"</span><br>");
-    htmlCode += ("<span class='paramOrder'>"+parameterData["parameterOrder"]+"</span><br>");
-    htmlCode += ("<span class='paramUnit'>"+parameterData["parameterUnit"]+"</span><br>");
-    htmlCode += ('</div></div>');
-    htmlCode += ('</div>');
-    return htmlCode;*/
 
     var htmlCode = '<div class="parameterData col-xs-2">';
     htmlCode += ('<div class="thumbnail"><div class="caption">');
     htmlCode += ("<div class='paramName alert alert-info thumbnailParameterData' contenteditable='true' style='margin-bottom: 5px; padding: 5px; text-align: center;'><b>"+parameterData["parameterName"]+"</b></div>");
-    htmlCode += ("<div class='paramMinValue alert alert-info' contenteditable='true' style='margin-bottom: 5px; padding: 5px; text-align: center;'>"+parameterData["parameterMinValue"]+"</div>");
-    htmlCode += ("<div class='paramMaxValue alert alert-info' contenteditable='true' style='margin-bottom: 5px; padding: 5px; text-align: center;'>"+parameterData["parameterMaxValue"]+"</div>");
-    htmlCode += ("<div class='paramOrder alert alert-info' contenteditable='true' style='margin-bottom: 5px; padding: 5px; text-align: center;'>"+parameterData["parameterOrder"]+"</div>");
-    htmlCode += ("<div class='paramUnit alert alert-info' contenteditable='true' style='margin-bottom: 5px; padding: 5px; text-align: center;'>"+parameterData["parameterUnit"]+"</div>");
+    htmlCode += ("<div class='paramMinValue alert alert-info thumbnailParameterData' contenteditable='true' style='margin-bottom: 5px; padding: 5px; text-align: center;'>"+parameterData["parameterMinValue"]+"</div>");
+    htmlCode += ("<div class='paramMaxValue alert alert-info thumbnailParameterData' contenteditable='true' style='margin-bottom: 5px; padding: 5px; text-align: center;'>"+parameterData["parameterMaxValue"]+"</div>");
+    htmlCode += ("<div class='paramOrder alert alert-info thumbnailParameterData' contenteditable='true' style='margin-bottom: 5px; padding: 5px; text-align: center;'>"+parameterData["parameterOrder"]+"</div>");
+    htmlCode += ("<div class='paramUnit alert alert-info thumbnailParameterData' contenteditable='true' style='margin-bottom: 5px; padding: 5px; text-align: center;'>"+parameterData["parameterUnit"]+"</div>");
     htmlCode += ('</div></div>');
     htmlCode += ('</div>');
     return htmlCode;
 }
 
+/*
 function gelAllParametersData(){
     var allParametersData = new Array();
 
@@ -115,4 +149,23 @@ function gelAllParametersData(){
         allParametersData.push(parametersData);
     });
     return allParametersData;
+}*/
+
+function gelAllParametersData(){
+    var allParametersData = new Array();
+
+    $(".parameterData").each(function(index){
+        var parametersData = new Array();
+        var i = index;
+        //parametersData.push("parameter"+i);
+        $(this).find('.thumbnailParameterData').each(function(i){
+            parametersData.push($(this).text());
+        });
+        allParametersData.push(parametersData);
+    });
+    return allParametersData;
+}
+
+function deleteColumn(){
+    console.log("delete column");
 }
